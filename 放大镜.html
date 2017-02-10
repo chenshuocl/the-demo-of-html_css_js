@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+	*{
+		padding: 0;
+		margin:0;
+	}
+	#box{
+		width: 350px;
+		height: 350px;
+		position: relative;
+		left: 100px;
+		top:100px;
+		border:1px solid #ccc;
+	}
+	#big{
+		width: 450px;
+		height: 450px;
+		position:absolute;
+		left:350px;
+		top:0;
+		background: url("image/0001.jpg") no-repeat top left;
+		border: 1px solid #ccc;
+		display: none;
+	}
+	#mask{
+		width: 197px;
+		height: 197px;
+		background: rgba(255,255,0,0.4);
+		position: absolute;
+		left:0;
+		top:0;
+		display: none;
+	}
+	#small{
+		position: relative;
+	}
+	</style>
+	<script type="text/javascript">
+	window.onload=function(){
+		function $(id){return document.getElementById(id);}
+		$("small").onmouseover=function(){
+			$("mask").style.display="block";
+			$("big").style.display="block";
+		}
+		$("small").onmouseout=function(){
+			$("mask").style.display="none";
+			$("big").style.display="none";
+		}
+		$("small").onmousemove=function(event){
+			var event=event||window.event;
+			// console.log(event.clientX);
+			var x=event.clientX-$("box").offsetLeft;
+			var y=event.clientY-$("box").offsetTop;
+			// console.log(x);
+			if(x<$("mask").offsetWidth/2){
+				x=$("mask").offsetWidth/2;
+			}else if(x>$("small").offsetWidth-$("mask").offsetWidth/2){
+				x=$("small").offsetWidth-$("mask").offsetWidth/2;
+			}
+			if(y<$("mask").offsetHeight/2){
+				y=$("mask").offsetHeight/2;
+			}else if(y>$("small").offsetHeight-$("mask").offsetHeight/2){
+				y=$("small").offsetHeight-$("mask").offsetHeight/2;
+			}
+			$("mask").style.left=x-$("mask").offsetWidth/2+"px";
+			$("mask").style.top=y-$("mask").offsetHeight/2+"px";
+			$("big").style.backgroundPositionX=-(x-$("mask").offsetWidth/2)*450/350+"px";
+			$("big").style.backgroundPositionY=-(y-$("mask").offsetHeight/2)*350/153+"px";
+		}
+	}
+	</script>
+</head>
+<body>
+	<div id="box">
+		<div id="small">
+		<img src="image/001.jpg">
+			<div id="mask"></div>
+		</div>
+		<div id="big">
+
+		</div>
+
+	</div>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+	#container{
+		width: 512px;
+		height: 400px;
+		overflow: hidden;
+		margin:100px auto;
+		background:url(image/mi.png) no-repeat top left;
+	}
+	#container span{
+		width:512px;
+		height: 200px;
+		display: block;
+		border:0;
+		padding: 0;
+		margin: 0;
+
+	}
+
+	</style>
+	<script type="text/javascript">
+	window.onload=function(){
+		function $(id){return document.getElementById(id);}
+		var num = 0; // 控制图片的Y值
+    	var timer = null; // 定时器名称!!!!
+		$("up").onmouseover = function(){
+      		timer =  setInterval(function(){
+          	  num -= 3;
+          	  num >= -1070 ? $("container").style.backgroundPositionY = num + "px" :  clearInterval(timer);
+       		},30);
+      	}
+       	$("up").onmouseout = function () {
+       		clearInterval(timer);
+       	}
+		$("down").onmouseover = function(){
+			// num=$("container").style.backgroundPositionY;
+			// console.log(num);这个得到的是值是“xxpx”,
+			// 而下面正确的写法中，注意，num与Y坐标是完全对等的，每计算一次NUM的值，就会立刻赋予Y值，所以一直完全对等。不需要额外再获取一次Y值。
+			// 但是也有bug：例如，num等于-1了，再加3后，num得2，此时，if终止，而Y值保留在-1时的状态。
+			timer =  setInterval(function(){
+          	  num += 3;
+          	  num <0 ? $("container").style.backgroundPositionY = num + "px" :  clearInterval(timer);
+       		},30);
+		}
+		$("down").onmouseout = function () {
+       		clearInterval(timer);
+		}
+
+		
+	}
+	</script>
+</head>
+<body>
+	<div id="container">
+	<span id="up"></span><span id="down"></span>
+	</div>
+</body>
+</html>

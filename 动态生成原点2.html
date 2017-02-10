@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+	*{
+		margin:0;
+		padding:0;
+	}
+	li{
+		position: absolute;
+		list-style-type: none;
+		float:left;
+		left:0;
+		display: none;
+	}
+	#container{
+		width: 730px;
+		height: 454px;
+		margin:100px auto;
+		overflow: hidden;
+		position:relative;
+		border:1px solid #ccc;
+	}
+
+	
+	#circle {
+		display:block;
+		width: 500px;
+		text-align:center;
+		position: absolute;
+		left:365px;
+		float: left;
+		bottom:10px;
+		margin-left:-250px;
+		z-index: 99;
+	}
+	
+	
+	#circle  span{
+			display: inline-block;
+			/*z-index: 99;*/
+			width: 18px;
+			height: 18px;
+			border-radius:50%;
+			cursor:pointer;
+			background-color: pink;
+			margin:10px;
+			text-align:center;
+	}
+	.show{
+		display: block!important;
+	}
+	.current{
+		background-color: purple!important;
+	}
+	</style>
+	<script type="text/javascript">
+	window.onload=function(){
+		var num=0;
+		function $(id){return document.getElementById(id)};
+		// 动态生成圆点。
+		var imgs = $("img").getElementsByTagName("li");
+		// console.log(imgs.length);
+		for(i=0;i<imgs.length;i++){
+			var span=document.createElement("span");
+			span.innerHTML=i+1;
+			$("circle").appendChild(span);
+		}
+		// var spans=$("circle").getElementsByTagName("span");
+		// spans[0].className="current";
+		// for(i=0;i<spans.length;i++){
+		// 	spans[i].index=i
+		// 	spans[i].onclick=function fun() {
+		// 		timer=setInterval(gun,30);
+		// 	}
+		// 	function gun(){
+		// 		num=num-(473*(this.index+1)-num)/10;
+		// 		$("img").children[0].style.left=num+"px";
+		// 	}
+		var spans=$("circle").getElementsByTagName("span");
+		spans[0].className="current";
+		for(i=0;i<spans.length;i++){
+			spans[i].index=i
+			spans[i].onclick=function fun() {
+				for(i=0;i<spans.length;i++){
+					imgs[i].className="";
+					spans[i].className="";
+				}
+				this.className="current";
+				imgs[this.index].className="show";
+			}
+		// }
+		}
+	}
+	</script>
+</head>
+
+<body>
+	<div id = "container">
+		<div id="img">
+			<li class="show"><img src="image/11.jpg"></li>
+			<li><img src="image/22.jpg"></li>
+			<li><img src="image/33.jpg"></li>
+			<li><img src="image/44.jpg"></li>
+			<li><img src="image/55.jpg"></li>
+			<li><img src="image/66.jpg"></li>
+		</div>
+		<div id="circle">
+			
+		</div>
+	</div>
+</body>
+</html>

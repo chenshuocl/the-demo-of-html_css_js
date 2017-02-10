@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+	#container{
+		width: 550px;
+		height: auto;
+		margin:100px auto;
+		border:1px solid #ccc;
+		padding: 10px;
+
+	}
+	#text{
+		resize:none;
+		width: 400px;
+		height: 200px;
+
+	}
+	li{
+		list-style-type: none;
+		border-bottom:1px dashed #ccc;
+		height: 22px;
+		width: 450px;
+		margin: auto;
+	}
+	a{
+		float:right;
+	}
+
+	</style>
+	<script type="text/javascript">
+	window.onload=function(){
+		function $(id){return document.getElementById(id);}
+		var btn=document.getElementsByTagName("button")[0];
+		btn.onclick=function(){
+			if($("text").value == ""){
+				alert("输入不能为空!");
+			}else{
+				var text=$("text").value;
+				$("text").value="";
+				li=document.createElement("li");
+				li.innerHTML=text+"<a href='javascript:;'>删除</a>";
+				var lis = $("container").getElementsByTagName("li");
+				if(lis.length == 0){
+					$("container").appendChild(li);
+				}else {
+					$("container").insertBefore(li,lis[0])
+				}
+
+			}
+			var as=document.getElementsByTagName("a");
+			for(i=0;i<as.length;i++){
+				as[i].index=i;
+				as[i].onclick=function(){
+					$("container").removeChild(this.parentNode);
+			}
+			
+
+			}
+		}
+	}
+
+	</script>
+</head>
+<body>
+	<div id="container">
+		微博发布
+		<textarea name="" id="text" ></textarea>
+		<button>发布</button>
+		<!-- <li>1</li>
+		<li>2</li>
+		<li>3</li>
+		<li>400</li>
+		<li>6</li>
+		<li>5</li> -->
+	</div>
+</body>
+</html>

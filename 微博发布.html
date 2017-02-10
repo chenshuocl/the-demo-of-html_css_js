@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		.box{
+			width: 600px;
+			height: auto;
+			padding: 10px;
+			margin:100px auto;
+			border: 1px solid #ccc;
+
+		}
+		ul{
+			list-style-type: none;
+			padding-left: 80px;
+			padding-right:70px;
+		}
+		.box li{
+			border-bottom:1px dashed #ccc;
+
+
+		}
+		#content{
+			resize:none;
+			display: inline-block;
+			width: 450px;
+			height: 200px;
+		}
+		button{
+			right:10px;
+			margin-left:10px;
+		}
+		a{
+			float:right;
+		}
+
+	</style>
+	<script type="text/javascript">
+		window.onload=function(){
+			function $(id){return document.getElementById(id)};
+			var ul=document.createElement("ul");
+			$("container").appendChild(ul);
+			var fa = document.getElementsByTagName("button")[0];
+			fa.onclick=function(){
+				var content = $("content").value;
+				$("content").value="";
+				if(content==""){
+					alert("输入不能为空！")
+				}
+				else{
+					var lis = ul.children;
+					var li=document.createElement("li");
+					li.innerHTML=content+"<a href ='javascript:;'>删除</a>";
+					if(lis.length==0){
+						ul.appendChild(li);
+					}
+					else{
+						ul.insertBefore(li,lis[0]);
+					}
+				}
+				var a = document.getElementsByTagName("a");
+				for(i=0;i<a.length;i++){
+					a[i].onclick=function(){
+						ul.removeChild(this.parentNode);
+					}
+				}
+			}
+			
+		}
+	</script>
+</head>
+<body>
+	<div class="box" id = "container">
+		微博发布：<textarea id="content"></textarea><button>发布</button>
+		
+	</div>
+	
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+	*{
+		padding: 0;
+		margin: 0;
+	}
+	div{
+		margin: 100px auto;
+		width: 400px;
+		height: 400px;
+		position: relative; 
+	}
+	#txt{
+		height: 20px;
+	}
+	#message{
+		font-size: 8px;
+		left:10px;
+		top:5px;
+		position: absolute;
+		cursor:text;
+		color:#ccc;
+	}
+
+	</style>
+	<script type="text/javascript">
+		window.onload=function () {
+			function $(id){return document.getElementById(id);}
+			$("txt").oninput = $("txt").onpropertychange = function(){
+				if(this.value==""){
+					$("message").style.display="block";
+				}
+				else{
+					$("message").style.display="none";
+				}
+			}
+		}
+	</script>
+</head>
+<body>
+<div>
+	<input type="text" id="txt"/>
+	<label for="txt" id="message">必败的国际大牌</label>
+	<button>搜索</button>
+</div>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		*{
+			margin:0;
+			padding: 0;
+		}
+		li{
+			list-style-type: none;
+			float:left;
+			width: 83px;
+			height: 42px;
+			line-height: 42px;
+			text-align: center;
+			position: relative;
+			/*z-index: 999;*/
+			cursor: pointer;
+		}
+		body{
+			background-color: black;
+		}
+		.container{
+			width: 800px;
+			height: 42px;
+			border-radius: 3px;
+			margin:100px auto;
+			background: url("image/rss.png") no-repeat right center white;
+			position: relative;
+		}
+		#cloud{
+			width: 83px;
+			height: 42px;
+			background: url("image/cloud.gif") no-repeat; 
+			position: absolute;
+			left:0;
+			right:0;
+		}
+	</style>
+	<script type="text/javascript">
+	window.onload=function(){
+		function $(id){return document.getElementById(id);}
+		var timer=null;
+		var leader=0;
+		var target=0;
+		var current=0
+		var lis=document.getElementsByTagName("li");
+		for(i=0;i<lis.length;i++){
+			lis[i].onmouseover=function(){
+				target=this.offsetLeft;
+			}
+			lis[i].onclick=function(){
+				current=this.offsetLeft;
+
+			}
+		}
+		var ul=document.getElementsByTagName("ul")[0];
+		ul.onmouseout=function(){
+			target=current;
+			setTimeout(timer);
+		}
+
+
+
+
+		setInterval(function(){
+			leader=leader+(target-leader)/10
+			$("cloud").style.left=leader+"px";
+		},20)
+	}
+	</script>
+</head>
+<body>
+	<div class="container">
+	<span id="cloud"></span>
+	<ul>
+		<li>企业文化</li>
+		<li>企业文化</li>
+		<li>企业文化</li>
+		<li>企业文化</li>
+		<li>企业文化</li>
+		<li>企业文化</li>
+		<li>企业文化</li>
+		<li>企业文化</li>
+	</ul>
+	</div>
+</body>
+</html>

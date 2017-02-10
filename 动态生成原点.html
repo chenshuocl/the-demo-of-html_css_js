@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		*{
+			margin:0;
+			padding: 0;
+		}
+		ul{
+			list-style: none;
+		}
+		#slider{
+			width: 730px;
+			height: 454px;
+			/*overflow: hidden;*/
+		}
+		#container{
+			width: 730px;
+			height:454px;
+			margin:100px auto;
+			position: relative;
+		}
+		#circle{
+			width: 300px;
+			height:38px;
+			position: absolute;
+			bottom:0px;
+			left:50%;                 /*注意居中的办法*/
+			margin-left: -150px;
+
+		}
+		#circle span{
+			float:left;
+			width: 18px;
+			height: 18px;
+			border-radius:50%;
+			cursor:pointer;
+			background-color: pink;
+			margin:10px;
+			text-align:center;
+		}
+		li{
+			position: absolute;
+			float:left;
+			left:0px;
+		}
+		.show{
+			display:block;
+		}
+		.current{
+			background-color: purple!important;
+		}
+
+	</style>
+	<script type="text/javascript">
+	window.onload=function(){
+		function $(id){return document.getElementById(id)};
+		var lis = $("slider").getElementsByTagName("li");
+		//var newspan = document.createElement("span");
+			for(i=0;i<lis.length;i++){
+				var newspan = document.createElement("span");
+				//如果用上面注释那种方法，只创建了一个span，
+				//然后加到circle里面，其已经是circle的子元素，反复把一个
+				//子元素加到其父元素里面，无效。
+				newspan.innerHTML = i+1;
+				$("circle").appendChild(newspan);			
+			}
+			var spans = $("circle").children;
+			spans[0].setAttribute("class","current");
+
+		for(i=0;i<spans.length;i++){
+			spans[i].index=i
+			spans[i].onclick=function fun() {
+				timer=setInterval(gun,30);
+			}
+			function gun(){
+				num=num-(473*(this.index+1)-num)/10;
+				$("slider").children[0].style.left=num+"px";
+			}
+			// for(i=0;i<spans.length;i++){
+			// 	spans[i].index=i;
+			// 	spans[i].onmouseover=function(){
+			// 		//spans[i].index=i; 不能放在这里，i不能出现在for（）{function}的function里面。
+			// 		//需要在function的外面先把i截过。
+			// 		for(j=0;j<spans.length;j++){
+			// 			spans[j].className="";
+			// 			lis[j].className="";
+			// 		}
+			// 		this.className="current";
+			// 		lis[this.index].className="show";
+			// 	}
+			// }
+
+	}
+	</script>
+</head>
+<body>
+	<div id="container">
+		<div id="slider">
+			<ul>
+				<li class = "show"><img src="image/11.jpg"></li>
+				<li><img src="image/22.jpg"></li>
+				<li><img src="image/33.jpg"></li>
+				<li><img src="image/44.jpg"></li>
+				<li><img src="image/55.jpg"></li>
+				<li><img src="image/66.jpg"></li>
+				<li><img src="image/66.jpg"></li>
+			</ul>
+		</div>
+		<div id="circle">
+			
+		</div>
+	</div>
+</body>
+</html>

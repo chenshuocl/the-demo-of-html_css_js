@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+function isClass(obj){
+	if(obj === null) return "Null";
+	if(obj === undefined) return "Undefined";
+	return Object.prototype.toString.call(obj).slice(8,-1);
+}
+function cloneObject(obj){
+	var result = null;
+	var objClass = isClass(obj);
+	// console.log(objClass);
+	if(objClass === "Object") {result ={};}
+	else if(objClass === "Array") {result =[];}
+	else {return obj;}
+	for(key in obj){
+		var copy=obj[key];
+		if(isClass(copy)=="Object"||"Array"){
+			result[key]=arguments.callee(copy);
+		}
+		else{
+			result[key]=copy;
+		}
+	}
+ 	return result;
+
+}
+var srcObj = {
+    a: 1,
+    b: {
+        b1: ["hello", "hi"],
+        b2: "JavaScript"
+    }
+};
+var abObj = srcObj;
+var tarObj = cloneObject(srcObj);
+
+srcObj.a = 2;
+srcObj.b.b1[0] = "Hello";
+
+console.log(abObj.a);
+console.log(abObj.b.b1[0]);
+
+console.log(tarObj.a);      // 1
+console.log(tarObj.b.b1[0]);    // "hello"
+
+function uniqArray(arr) {
+	var newOne = [];
+    for(i=0;i<arr.length;i++){
+    	if(newOne.indexOf(a[i])==-1){
+    		newOne.push(a[i]);
+    	}
+    }
+    return newOne;
+}
+
+// 使用示例
+var a = [1, 3, 5, 7, 5, 3];
+var b = uniqArray(a);
+console.log(b); // [1, 3, 5, 7]
+
+
+</script>
+
+
+</body>
+</html>

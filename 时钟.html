@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		.box{
+			width: 600px;
+			height: 600px;
+			border: 1px solid #ccc;
+			background: url(image/clock.jpg) no-repeat;
+			margin:100px auto;
+			position: relative;
+		}
+		.zhizhen{
+			width:100%;
+			height: 100%;
+			position: absolute;
+			left:0;
+			top:0;
+		}
+		#hour{
+			background: url(image/hour.png) no-repeat center center;
+		}
+		#min{
+			background: url(image/minute.png) no-repeat center center;
+		} 
+		#second{
+			background: url(image/second.png) no-repeat center center;
+		}
+
+	</style>
+	<script type="text/javascript">
+		window.onload=function(){
+			function $(id){return document.getElementById(id)};
+			setInterval(function(){
+				var now = new Date();
+				var h = now.getHours();
+				var m = now.getMinutes();
+				var s = now.getSeconds();
+				var ms =now.getMilliseconds ();
+				// console.log(typeof h);number
+				m=m+s/60;
+				h=(h+m/60)%12;
+				s=s+ms/1000;
+				$("hour").style.WebkitTransform="rotate("+h*30+"deg)";
+				$("min").style.WebkitTransform="rotate("+m*6+"deg)";
+				$("second").style.WebkitTransform="rotate("+s*6+"deg)";
+			},1000)
+		}
+	</script>
+</head>
+<body>
+	<div class="box">
+		<div class ="zhizhen" id="hour"></div>
+		<div class="zhizhen" id="min"></div>
+		<div class="zhizhen" id="second"></div>
+	</div>
+</body>
+</html>
