@@ -1,13 +1,2 @@
 # the-demo-of-html_css_js
-asdasdasd
-asdfafg
-sadf
-sdgf
-dsg
-d
-gs
-fs
-df
-sadf
-ad
-f
+a这里记录一些简单的小demo
